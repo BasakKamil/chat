@@ -1,21 +1,29 @@
 
 import './App.css';
 import Backg from './Background/backg.jsx';
-import Chat from './Chat/Chat.jsx';
+import Regular from './components/Mems/Regular.jsx';
+import Hot from './components/Mems/Hot.jsx';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import ToggleMenu from './components/Menu/ToggleMenu.jsx';
 
 function App() {
 
-  
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-  
+
   return (
-    <div className="App" style={{width,height}}>
+    <Router>
+    <div className="App">
+          <ToggleMenu/>    
           <Backg/>
-          <div className="AllChat">
-              <Chat/>
-          </div>
     </div>
+    <Switch>
+        <Route path='/regular'>
+            <Regular/>
+        </Route>
+        <Route path='/'>
+          <Hot/>
+        </Route>
+    </Switch>
+    </Router>
   );
 }
 

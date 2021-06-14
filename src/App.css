@@ -1,8 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300&display=swap');
+
 .App {
   text-align: center;
   width: 100%;
   height: 100%;
   overflow: hidden;
+  font-family: 'Comic Neue', cursive;
+}
+.showMenu{
+  display: none;
+}
+.navBar{
+  position: absolute;
+  z-index: 9999999999;
+  left: 1%;
+  top: 1%;
+  width: 100%;
+}
+.navBar > button{
+  left: 10%;
+  width: 10%;
+  position: absolute;
+}
+.menuNav{
+  width: 50%;
+  position: absolute;
+  right: 10%;
+  top: 1%;
+}
+.menuNav > li{
+  
+    list-style: none;
+    padding: 2%;
+    margin: 2%;
+    text-align: center;
+    border-radius: 10px;
+    background-color: white;
+    width: 30%;
+    float: left;
+}
+.menuNav > li > a{
+  color: black;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+}
+.MemsStyle{
+  z-index: 99999;
+  position: absolute;
+  left: 10%;
+  top: 20%;
+  width: 80%;
+  text-align: center;
+  border-radius: 10px;
+  background-color: #ffffffc9;
+  display: block;
 }
 .MyMesBox{
   width: 100%;
@@ -56,9 +108,25 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+.LogName{
+  z-index: 999999999999;
+  position: absolute;
+  background: #ffffffc4;
+  border-radius: 10px;
+  left: 30%;
+  width: 36%;
+  padding: 2%;
+  top: 20%;
+}
 .ThreeBack{
   position: absolute;
   z-index: 1;
+  width: 100% !important;
+  height: 100% !important;
+}
+.ThreeBack > canvas {
+  width: 100% !important;
+  height: 100% !important;
 }
 .AllChat{
   position: relative;

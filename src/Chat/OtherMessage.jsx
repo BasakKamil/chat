@@ -1,4 +1,4 @@
-import MessageForm from "./MessageForm"
+// import MessageForm from "./MessageForm"
 
 const OtherMessage = ({lastMessage, message}) => {
 

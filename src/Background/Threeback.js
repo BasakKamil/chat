@@ -3,10 +3,10 @@ import * as THREE from 'three';
 import { WebGLRenderer } from 'three';
 import smoke from '../images/loga/smoke1.png';
 import stars from '../images/loga/star.png';
-import Foto1 from '../Background/logawww/obraz1.png';
-import Foto2 from '../Background/logawww/obraz2.png';
-import Foto3 from '../Background/logawww/obraz3.png';
-import Foto4 from '../Background/logawww/obraz4.png';
+import Foto1 from '../Background/logawww/cn1.jpg';
+import Foto2 from '../Background/logawww/cn2.jpg';
+import Foto3 from '../Background/logawww/cn1.jpg';
+import Foto4 from '../Background/logawww/cn3.jpg';
 
 export class ThreeBack extends Component {
     constructor(props){
@@ -185,9 +185,13 @@ export class ThreeBack extends Component {
       }
     render() {
         return (
-            <div className="ThreeBack" ref={mount => this.mount = mount}></div>
+            <div className="ThreeBack" ref={mount => this.mount = mount} style={{width,height}}></div>
         )
     }
 }
+
+const width = window.innerWidth;
+const height = window.innerHeight;
+
 
 export default ThreeBack
