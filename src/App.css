@@ -10,34 +10,99 @@
 .showMenu{
   display: none;
 }
-.navBar{
+.MemsListKamil{
   position: absolute;
+  width: 80%;
+  left: 10%;
+  border-radius: 10px;
+  top: 20%;
+  background: #ffffffc7;
+  z-index: 99;
+}
+.navBar{
+  position: fixed;
   z-index: 9999999999;
   left: 1%;
+  background-color: #3f51b5b5;
   top: 1%;
+  width: 98%;
+  height: auto;
+  border-radius: 10px;
+  min-height: 50px;
+}
+.regularMeme{
+  width: 90%;
+  text-align: center;
+  background-color: white;
+  position: absolute;
+  z-index: 99999;
+  left: 5%;
+  top: 10%;
+}
+.MojImg{
+  width: 20%;
+}
+.KamilaFormButt{
+    left: 1%;
+    position: absolute;
+    top: 10%;
+}
+.MuiPaper-root{
+  width: 80%;
+  height: auto;
+  min-height: 60vh;
+  text-align: center;
+  }
+.ShowImg{
+  display: block;
+  float: left;
+  width: 10%;
+}
+.ImgSrc{
   width: 100%;
 }
-.navBar > button{
+.KamilForm{
+  display: block;
+  width: 80%;
+  text-align: center;
+  margin: 0 auto;
+  padding: 5%;
+  z-index: 99999;
+  position: absolute;
+  background: white;
+  top: 120%;
+  border-radius: 10px;
+  left: 10%;
+  }
+.navBar > .KamilaButt{
   left: 10%;
   width: 10%;
+  top: 10%;
   position: absolute;
 }
 .menuNav{
-  width: 50%;
+  width: 60%;
   position: absolute;
-  right: 10%;
+  right: -20%;
   top: 1%;
 }
 .menuNav > li{
-  
-    list-style: none;
-    padding: 2%;
-    margin: 2%;
-    text-align: center;
-    border-radius: 10px;
-    background-color: white;
-    width: 30%;
-    float: left;
+  list-style: none;
+  padding: 2px;
+  margin: 1%;
+  text-align: center;
+  border-radius: 10px;
+  width: 20%;
+  float: left;
+}
+.MemsStyleHot{
+  width: 90%;
+  text-align: center;
+  background-color: white;
+  position: absolute;
+  z-index: 99999;
+  left: 5%;
+  top: 10%;
 }
 .menuNav > li > a{
   color: black;
@@ -76,7 +141,7 @@
   width: 100%;
   z-index: 1;
   height: 100%;
-  position: absolute;
+  position: fixed;
 }
 .ObrazekWiadomosci{
   float: right;
@@ -119,7 +184,7 @@
   top: 20%;
 }
 .ThreeBack{
-  position: absolute;
+  
   z-index: 1;
   width: 100% !important;
   height: 100% !important;
