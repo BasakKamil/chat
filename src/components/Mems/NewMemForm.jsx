@@ -17,7 +17,16 @@ const NewmemForm = ({addMems,templates}) => {
             container: {
                 display: 'flex',
                 flexWrap: 'wrap'
-            }
+            },
+            root: {
+                background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+                border: 0,
+                borderRadius: 3,
+                boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+                color: 'white',
+                height: 48,
+                padding: '0 30px',
+              },
         }
     ));
     const classes = useStyles();
@@ -46,7 +55,7 @@ const NewmemForm = ({addMems,templates}) => {
 
     return(
         <div className="FormKamila">
-            <Button onClick= {handleClickOpen}>OPEN</Button>
+            <Button onClick= {handleClickOpen} className={classes.root} >DODAJ MEMA</Button>
             <Dialog open={open} className="KamilaDialog">
                 <DialogTitle> Dodaj Mema Mistrzu :p</DialogTitle>
                 <DialogContent>
@@ -64,7 +73,7 @@ const NewmemForm = ({addMems,templates}) => {
                                         )
                                      })}
                                 </Select>
-                            <img className="BasiImg" src={img} alt="new"/>
+                            <img className="BasiImg" src={img} alt=""/>
           
                         <Button type="submit" value="add mem" variant="contained" color="primary" size="medium">ADD</Button>
                         </FormControl>

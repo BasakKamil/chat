@@ -1,22 +1,44 @@
-import React, { Component } from 'react';
-import List from '@material-ui/core/List';
+import React, { useState } from 'react';
+import {Paper, Grid, makeStyles} from '@material-ui/core';
 import MemShow from './MemShow';
 
-class Regular extends Component{
+
+const Regular = ({mems}) => {
 
 
-render(){
-    const { mems }= this.props;
+    const useStyles = makeStyles((theme)=>({
+        root: {
+             flexGrow:1,
+        },
+        paper: {
+             margin: '1%',
+             width: '23%'
+        },
+        control: {
+             padding: theme.spacing(2),
+        }
+    }))
+
     
+    const classes = useStyles();
+
+    const [spacing,setSpacing] = useState(4);
+
     return mems.length ? (
         <div className="MemsListKamil">
+            <Grid container spacing={4}>
+                <Grid item xs={12}>
+                    <Grid container justify="center" spacing={spacing}>
                 {mems.map(mem => {
                 return (
-                <List className="col">
+                <Paper className={classes.paper}>
                        <MemShow mem={mem} key={mem.id}/>
-                </List>)
+                </Paper>)
                 })
                 }
+                </Grid>
+                </Grid>
+                </Grid>
         </div>
     ) : (
         <div className="NoMems">
@@ -26,6 +48,6 @@ render(){
 }
 
 
-}
+
 
 export default Regular
