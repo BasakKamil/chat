@@ -1,4 +1,4 @@
-import React,{ useState } from 'react';
+import React,{ useContext, useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -10,8 +10,12 @@ import Input from '@material-ui/core/Input';
 import {makeStyles} from '@material-ui/core/styles';
 import { DialogActions } from '@material-ui/core';
 import { FormControl } from '@material-ui/core';
+import { MemContext } from '../../context/MemContextProvider';
 
-const NewmemForm = ({addMems,templates}) => {
+const NewmemForm = ({templates}) => {
+    const {dispatch} = useContext(MemContext);
+
+
     const useStyles = makeStyles((theme)=>(
         {
             container: {
@@ -37,7 +41,12 @@ const NewmemForm = ({addMems,templates}) => {
     const [img,setImg] = useState('');
     const handleSubmit = (e) => {
         e.preventDefault();
-        addMems(title,img);
+        // addMems(title,img);
+        dispatch({
+            type: 'ADD_MEM', 
+            mem: {
+                title,img
+            }});
         setTitle('');
         setImg('');
         
@@ -75,7 +84,7 @@ const NewmemForm = ({addMems,templates}) => {
                                 </Select>
                             <img className="BasiImg" src={img} alt=""/>
           
-                        <Button type="submit" value="add mem" variant="contained" color="primary" size="medium">ADD</Button>
+                        <Button type="submit" value="add mem" variant="contained" color="primary" size="medium">Dodaj</Button>
                         </FormControl>
                     </form>
                 </DialogContent>

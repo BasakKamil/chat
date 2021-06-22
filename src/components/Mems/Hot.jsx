@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
+import React, { useContext } from 'react';
 import {Grid} from '@material-ui/core';
-// import MemShow from './MemShow';
-
-class Hot extends Component{
+import { MemContext } from '../../context/MemContextProvider';
 
 
-render(){
-    const { mems }= this.props;
+const Hot = () => {
+
+
+    const {mems} = useContext(MemContext);
     const newFilter = mems.filter(mem => {
         return (mem.upvotes - mem.downvotes) > 5
     });
@@ -15,8 +15,6 @@ render(){
         <div className="MemsListKamil">
 
            {newFilter.map((mem,key)=> {     
-               const klucz = key + 1;
-               console.log(mem, key);
                return(
             <Grid 
                 container 
@@ -29,7 +27,7 @@ render(){
                     <Grid item>
                     <div>
                         {mem.title}
-                        <img className="" src={mem.img}/>
+                        <img className="" src={mem.img} alt={mem.title}/>
                     </div>
                     </Grid>
                 </Grid>
@@ -44,9 +42,6 @@ render(){
            Niestety ale obecnie nie posiadamy memów w bazie :(
         </div>
     )
-}
-
-
 }
 
 export default Hot

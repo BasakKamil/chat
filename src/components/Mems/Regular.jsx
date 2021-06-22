@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {Paper, Grid, makeStyles} from '@material-ui/core';
 import MemShow from './MemShow';
+import { MemContext } from '../../context/MemContextProvider';
 
 
-const Regular = ({mems}) => {
 
+const Regular = () => {
 
+    const {mems} = useContext(MemContext);
     const useStyles = makeStyles((theme)=>({
         root: {
              flexGrow:1,

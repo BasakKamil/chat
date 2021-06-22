@@ -10,6 +10,7 @@ export const memReducer = (state,action) => {
                 img: action.mem.img,
                 id: v4()
             }]
+            
         // case 'REMOVE_MEM':
         //     return state.filter(mem => mem.id !== id)
         default :
