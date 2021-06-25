@@ -1,18 +1,16 @@
-import React,{ useContext, useState } from 'react';
-import TextField from '@material-ui/core/TextField';
+import { DialogActions, FormControl } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import InputLabel from '@material-ui/core/InputLabel';
-import Select from '@material-ui/core/Select';
-import Input from '@material-ui/core/Input';
-import {makeStyles} from '@material-ui/core/styles';
-import { DialogActions } from '@material-ui/core';
-import { FormControl } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import React, { useContext, useEffect, useState } from 'react';
 import { MemContext } from '../../context/MemContextProvider';
+import gif from '../../images/loga/giphy.gif';
 
-const NewmemForm = ({templates}) => {
+const NewmemForm = () => {
     const {dispatch} = useContext(MemContext);
 
 
@@ -20,7 +18,8 @@ const NewmemForm = ({templates}) => {
         {
             container: {
                 display: 'flex',
-                flexWrap: 'wrap'
+                flexWrap: 'wrap',
+                margin: '0'
             },
             root: {
                 background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
@@ -30,69 +29,201 @@ const NewmemForm = ({templates}) => {
                 color: 'white',
                 height: 48,
                 padding: '0 30px',
+                margin: 'auto',
+                textAlign: "center",
+                zindex: '999999999999999'
               },
+              input: {
+                textAlign: "center",
+                width: '100%',
+                top: '-32px',
+                fontSize: '18px',
+                display: 'block'
+              },
+              skip: {
+                  textAlign: 'center',
+              },
+              new: {
+                display: 'block',
+                position: 'relative'
+              },
+              text: {
+                backgroundColor: '#d3d3d387',
+                borderRadius: '10px',
+                padding: '5px',
+                margin: '1%',
+              },
+              img: {
+                  width: '100%'
+              }
+
         }
     ));
+   
     const classes = useStyles();
     const [title,setTitle] = useState('');
-    const [title1,setTitle1] = useState('');
-    const [title2,setTitle2] = useState('');
     const [open,setOpen] = useState(false);
     const [img,setImg] = useState('');
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // addMems(title,img);
-        dispatch({
-            type: 'ADD_MEM', 
-            mem: {
-                title,img
-            }});
-        setTitle('');
-        setImg('');
+    const [memes,setMemes] =useState([]);
+    const [memeIndex,setMemeIndex] = useState(0);
+    const [captions,setCaptions] = useState([]);
+    const [box_count, setBox_count] = useState('');
+  
+    useEffect(()=>{
+      fetch("https://api.imgflip.com/get_memes").then(x=>
+           x.json().then(response =>
+               {    
+                   const _memes = response.data.memes;
+                   setMemes(_memes);
+                   shuffleMemes(_memes);
+               }
+            )
+      );
+    },[]);
+
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
         
+    //     dispatch({
+    //         type: 'ADD_MEM', 
+    //         mem: {
+    //             title,img
+    //         }});
+    //     setTitle('');
+    //     setImg('');
+        
+    // }
+
+    const generate = () => {
+        const currentMem = memes[memeIndex];
+        const formData = new FormData();
+
+        
+
     }
+
     const handleClickOpen = () => {
         setOpen(true);
     }
     const handleClose = () => {
         setOpen(false);
     }
-    const handleChange = (e) => {
-        e.preventDefault();
-        setImg(e.target.value);       
+
+    // const handleChange = (e) => {
+    //     e.preventDefault();
+    //     setImg(e.target.value);  
+    //     setBox_count(e.target.box_count);           
+    //     console.log(img,box_count);
+    // }
+   
+    const shuffleMemes = (array) => {
+        for(let i = array.length - 1; i>0; i--){
+            const j = Math.floor(Math.random()*i);
+            const temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+    }
+    const next = () => {
+         setMemeIndex(memeIndex + 1);
+    }
+    const back = () => {
+        setMemeIndex(memeIndex - 1);
     }
 
-    return(
-        <div className="FormKamila">
-            <Button onClick= {handleClickOpen} className={classes.root} >DODAJ MEMA</Button>
-            <Dialog open={open} className="KamilaDialog">
-                <DialogTitle> Dodaj Mema Mistrzu :p</DialogTitle>
-                <DialogContent>
+    useEffect(()=>{
+        if(memes.length){
+            setCaptions(Array(memes[memeIndex].box_count).fill(''));
+        }
+    },[memeIndex,memes]);
 
-                    <form onSubmit={handleSubmit} className={classes.container}>
-                        <FormControl>
-                            <InputLabel>Nazwa Mema:</InputLabel> 
-                            <TextField  type="text" value={title}  onChange={(e) => setTitle(e.target.value)} required/>
-                            <TextField  type="text" value={title1}  onChange={(e) => setTitle1(e.target.value)} required/>      
-                            <TextField  type="text" value={title2}  onChange={(e) => setTitle2(e.target.value)} required/>
-                                <Select native value={img} onChange={handleChange} input={<Input id="demo-dialog-native"/>}> 
-                                    {templates.map(template => {
-                                        return (
-                                            <option value={template.url}>{template.name}</option>
-                                        )
-                                     })}
-                                </Select>
-                            <img className="BasiImg" src={img} alt=""/>
-          
-                        <Button type="submit" value="add mem" variant="contained" color="primary" size="medium">Dodaj</Button>
+    useEffect(()=>{
+        console.log(captions);
+    },[captions]);
+
+    const updateCaption = (e,index) => {
+        const text = e.target.value || '';
+        setCaptions(
+            captions.map((caption,_index)=> {
+                if(index === _index){
+                    return text;
+                } else {
+                    return caption
+                }
+            })
+        )
+    }
+    
+
+    return( 
+        memes.length ? 
+        captions.length ?
+        <div className="FormKamila">
+             <Button onClick= {handleClickOpen} className={classes.root} >DODAJ MEMA</Button>
+             <Dialog open={open} className="KamilaDialog">
+                    <DialogTitle> Dodaj Mema Mistrzu :p</DialogTitle>
+                <DialogContent>
+                    <form onSubmit={generate} className={classes.container}>
+                        <FormControl className="kamilatext">
+                        <InputLabel className={classes.input}>Nazwa Mema:</InputLabel> 
+                        <TextField  className={classes.text} type="text" value={title}  onChange={(e) => setTitle(e.target.value)} required/>
+                             <img className={classes.img} src={memes[memeIndex].url} /> 
+                             <Button className={classes.skip} onClick={next}>DALEJ</Button>
+                             <Button className={classes.skip} onClick={back}>WROC</Button>
+                             <div className="KamilaDialogMap">
+                                { 
+                                    captions.map((c,index) => (
+                                        <DialogContent className={classes.new} >
+                                        <InputLabel>Tekst {index +1}</InputLabel> 
+                                        <TextField className={classes.text} key={index} onChange={(e)=> updateCaption(e, index) } />
+                                        </DialogContent>
+                                    ))
+                                }
+                                </div>
                         </FormControl>
+                        <Button type="submit" value="add mem" variant="contained" color="primary" size="medium">Dodaj</Button>
                     </form>
-                </DialogContent>
+                </DialogContent>    
                 <DialogActions>      
                     <Button onClick={handleClose} color="primary">CLOSE</Button>
-                </DialogActions>     
-            </Dialog>
+                </DialogActions>          
+             </Dialog>
         </div>
+        : <></>
+        : <>
+          <Button onClick= {handleClickOpen} className={classes.root} >DODAJ MEMA</Button>
+          <Dialog open={open} className="KamilaDialog">
+            <img src={gif} frameBorder="0" className="KamilaGif" />
+          </Dialog>
+          <DialogActions>      
+                <Button onClick={handleClose} color="primary">CLOSE</Button>
+          </DialogActions>  
+          </>
+        // 
+           
+        //     
+        //        
+
+                    
+                           
+        //                         <Select native onChange={handleChange} input={<Input id="demo-dialog-native"/>}> 
+        //                             {memes.map(mem => {
+        //                                 // console.dir(template);
+        //                                 return (
+        //                                     <option value={mem.url} box_count={mem.box_count}>
+        //                                        {mem.name} z {mem.box_count} Komentarzami            
+        //                                     </option>
+        //                                 )
+        //                              })}
+        //                         </Select>
+        
+        //                     <img className="BasiImg" src={img} alt=""/>
+              
+                        
+                 
+               
+        //    
+       
         
     )
 }

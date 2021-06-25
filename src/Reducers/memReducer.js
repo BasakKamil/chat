@@ -11,8 +11,8 @@ export const memReducer = (state,action) => {
                 id: v4()
             }]
             
-        // case 'REMOVE_MEM':
-        //     return state.filter(mem => mem.id !== id)
+        case 'REMOVE_MEM':
+           return state.filter(mem => mem.id !== action.id)
         default :
             return state
     }

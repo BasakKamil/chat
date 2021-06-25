@@ -1,5 +1,4 @@
-import React, {createContext, useReducer} from 'react';
-// import {v4} from 'uuid';
+import React, {createContext, useReducer, useEffect } from 'react';
 import { memReducer } from '../Reducers/memReducer';
 
 export const MemContext = createContext();
@@ -13,14 +12,22 @@ const MemContextProvider = (props) => {
         {title: 'Mem5',upvotes: 17, downvotes: 2, img: "https://i.imgflip.com/3lmzyx.jpg", id:5},
         {title: 'Mem6',upvotes: 17, downvotes: 2, img: "https://i.imgflip.com/3lmzyx.jpg", id:5},
         {title: 'Mem7',upvotes: 17, downvotes: 2, img: "https://i.imgflip.com/3lmzyx.jpg", id:6}
-    ]);
-    console.log(mems);
-    // const addMems = (title,img) => {
-    //     setMems([...mems, {title: title,upvotes: 0,downvotes: 0, img: img, id: v4()}]);
+    ], 
+    // () => {
+    //     const localData = localStorage.getItem('mems');
+    //     return localData ? JSON.parse(localData) : [];
     // }
-    // const removeMem = (id) => {
-    //     setMems(mems.filter(mem => mem.id !== id));
-    // }
+    );
+
+    useEffect(()=> {
+        localStorage.setItem('mem', JSON.stringify(mems))
+    },[mems]);
+
+    
+
+    // console.log(mems);
+
+    
 
     return (
         <MemContext.Provider value={{mems,dispatch}}>
