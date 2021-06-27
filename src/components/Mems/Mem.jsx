@@ -29,7 +29,7 @@ const Mem = ({mem,box}) => {
              {box.map((Text,index) => {
                  const nr = index +1 ;
                  return(
-                     <p className="p" style={{top:`${nr}0%`}}>{Text}</p>      
+                     <p className="p" style={{top:`${nr}0%`}} key={index}>{Text}</p>      
                  )
              })}
               </div>

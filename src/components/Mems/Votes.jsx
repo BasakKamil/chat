@@ -1,6 +1,6 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext} from 'react';
 import { RatingContext } from '../../context/RatingContextProvider';
-import { MemContext } from '../../context/MemContextProvider';
+// import { MemContext } from '../../context/MemContextProvider';
 
 const Votes = () => {
 

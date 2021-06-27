@@ -37,11 +37,11 @@ const Regular = () => {
             <Grid container spacing={4}>
                 <Grid item xs={12}>
                     <Grid container justify="center" >
-                        {mems.map(mem => {
+                        {mems.map((mem,index) => {
                             const box = mem.captions;
                             return (
-                                <Paper className={classes.paper}>
-                                        <MemShow mem={mem} id={mem.id} box={box}/>            
+                                <Paper className={classes.paper} key={index}>
+                                        <MemShow mem={mem} id={mem.id} box={box} />            
                                 </Paper>)
                             })
                         }

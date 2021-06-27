@@ -9,7 +9,6 @@ const MemShow = (props) => {
 
     const {mem,box,id} = props;
     const {dispatch} = useContext(MemContext);
-    console.log(id);
 
     const removeMem = () => {
         dispatch({

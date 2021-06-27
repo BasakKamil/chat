@@ -189,9 +189,9 @@ const NewmemForm = () => {
                                 { 
                                     captions.map((c,index) => {
                                         return(
-                                        <DialogContent className={classes.new} >
-                                        <InputLabel>Tekst {index +1}</InputLabel> 
-                                        <TextField className={classes.text} key={index} onChange={(e)=> updateCaption(e, index) } />
+                                        <DialogContent className={classes.new} key={index} >
+                                            <InputLabel>Tekst {index +1}</InputLabel> 
+                                            <TextField className={classes.text} key={index} onChange={(e)=> updateCaption(e, index) } />
                                         </DialogContent>
                                         )
                                         })
