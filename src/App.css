@@ -1,12 +1,34 @@
 @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Comic+Neue&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Mouse+Memoirs&display=swap');
 .App {
   text-align: center;
   width: 100%;
   height: 100%;
   overflow: hidden;
   font-family: 'Comic Neue', cursive;
+}
+.KamciaWewnatrz > p{ 
+  position : absolute;
+  text-align: center;
+  -webkit-text-stroke: 1px black;
+  color: lightgrey;
+  font-family: 'Mouse Memoirs', sans-serif;
+  width: 100%;
+  text-transform: uppercase;
+  left: 0;
+}
+
+
+.KamciaWewnatrz{
+  position: absolute;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+  font-weight: bold;
+  font-size: 35px;
+  top: 1px;
+
 }
 .showMenu{
   display: none;
@@ -27,6 +49,17 @@
   top: 20%;
   z-index: 99;
 }
+.kamilatext{
+  width: 100% !important;
+}
+.KamilaStylReg > button{
+  background-color: black;
+  color: wheat;
+  margin: 2%;
+}
+.KamilaDialog{
+  z-index: 999999999999999999999 !important;
+}
 .navBar{
   position: fixed;
   z-index: 9999999999;
@@ -37,6 +70,7 @@
   height: auto;
   border-radius: 10px;
   min-height: 50px;
+  
 }
 .regularMeme{
   width: 90%;
@@ -110,7 +144,6 @@
 }
 .menuNav > li{
   list-style: none;
-  padding: 2px;
   margin: 1%;
   text-align: center;
   border-radius: 10px;
@@ -127,10 +160,9 @@
   top: 10%;
 }
 .menuNav > li > a{
-  color: black;
   text-decoration: none;
-  font-size: 16px;
   font-weight: bold;
+  color: black;
 }
 .MemsStyle{
   z-index: 99999;

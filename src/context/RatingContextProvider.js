@@ -1,22 +1,23 @@
-import React, {createContext, useState, useReducer} from 'react';
-
-const RatingContext = createContext();
-
-const RatingConttextProvider = (props) => {
-
-const [addOneplus,dispatch] = useReducer(plusReducer,20);
-
-    // const [ratingplus,setRatingplus] = useState(20);
-    const [ratingminus,setRatingminus] = useState(20);
+import React,{ createContext, useReducer, useState } from "react";
+import RatingReducerUpVotes from "../Reducers/RatingReducerUpVotes";
 
 
-const addOneplus = setRatingplus(ratingplus + 1);
-const subtractOne = setRatingminus(ratingminus - 1);
+export const RatingContext =  createContext();
 
-return(
-    <RatingConttext.Provider value={ratingplus,ratingminus}>
-        {props.children}
-    </RatingConttext.Provider>
-)
-
+const RatingContextProvider = (props) => {
+    
+    const [upvotes,dispatch ] = useReducer(RatingReducerUpVotes,0); 
+    const [downvotes,setDownvotes] = useState(0);
+   
+    const remove = () => {
+        setDownvotes(downvotes + 1);
+    }
+   
+    return (
+        <RatingContext.Provider value={{upvotes,downvotes,setDownvotes,remove,dispatch}}>
+            {props.children}
+        </RatingContext.Provider>
+    )
 }
+
+export default RatingContextProvider

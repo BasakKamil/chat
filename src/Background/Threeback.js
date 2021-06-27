@@ -153,6 +153,11 @@ export class ThreeBack extends Component {
     
     
     }
+
+    // newText = () => {
+    //     this.text = new THREE.TextGeometry( text, parameters );
+        
+    // }
     componentDidMount(){
      
         this.superSztorm();

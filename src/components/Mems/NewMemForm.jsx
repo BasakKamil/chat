@@ -9,6 +9,8 @@ import TextField from '@material-ui/core/TextField';
 import React, { useContext, useEffect, useState } from 'react';
 import { MemContext } from '../../context/MemContextProvider';
 import gif from '../../images/loga/giphy.gif';
+import Buttons from '../Form/Buttons';
+
 
 const NewmemForm = () => {
     const {dispatch} = useContext(MemContext);
@@ -48,7 +50,7 @@ const NewmemForm = () => {
                 position: 'relative'
               },
               text: {
-                backgroundColor: '#d3d3d387',
+                
                 borderRadius: '10px',
                 padding: '5px',
                 margin: '1%',
@@ -67,7 +69,7 @@ const NewmemForm = () => {
     const [memes,setMemes] =useState([]);
     const [memeIndex,setMemeIndex] = useState(0);
     const [captions,setCaptions] = useState([]);
-    const [box_count, setBox_count] = useState('');
+    // const [boxes, setBoxes] = useState('');
   
     useEffect(()=>{
       fetch("https://api.imgflip.com/get_memes").then(x=>
@@ -81,25 +83,35 @@ const NewmemForm = () => {
       );
     },[]);
 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
+    const handleSubmit = (e) => {
+        e.preventDefault();
         
-    //     dispatch({
-    //         type: 'ADD_MEM', 
-    //         mem: {
-    //             title,img
-    //         }});
-    //     setTitle('');
-    //     setImg('');
+        dispatch({
+            type: 'ADD_MEM', 
+            mem: {
+                title,img,captions
+            }});
+        setTitle('');
+        setImg('');
+        generateMem();
         
-    // }
+    }
 
-    const generate = () => {
-        const currentMem = memes[memeIndex];
+    const generateMem = () => {
+        const currentMeme = memes[memeIndex];
         const formData = new FormData();
 
-        
+        formData.append('username', 'KamilB'); 
+        formData.append('password', 'Basak020691'); 
+        formData.append('template_id', currentMeme.id); 
+        captions.forEach((c,index) => formData.append(`boxes[${index}][text]`,c));
 
+        fetch('https://api.imgflip.com/caption_image',{
+            method: 'POST',
+            body: formData
+        }).then(res =>{
+            console.log(res);
+        });
     }
 
     const handleClickOpen = () => {
@@ -128,20 +140,22 @@ const NewmemForm = () => {
          setMemeIndex(memeIndex + 1);
     }
     const back = () => {
+      
         setMemeIndex(memeIndex - 1);
     }
-
+   
     useEffect(()=>{
         if(memes.length){
             setCaptions(Array(memes[memeIndex].box_count).fill(''));
-        }
+        }       
     },[memeIndex,memes]);
 
     useEffect(()=>{
-        console.log(captions);
+        setCaptions(captions);
     },[captions]);
 
     const updateCaption = (e,index) => {
+        setImg(memes[memeIndex].url);
         const text = e.target.value || '';
         setCaptions(
             captions.map((caption,_index)=> {
@@ -163,25 +177,28 @@ const NewmemForm = () => {
              <Dialog open={open} className="KamilaDialog">
                     <DialogTitle> Dodaj Mema Mistrzu :p</DialogTitle>
                 <DialogContent>
-                    <form onSubmit={generate} className={classes.container}>
+                    <form onSubmit={handleSubmit} className={classes.container}>
                         <FormControl className="kamilatext">
                         <InputLabel className={classes.input}>Nazwa Mema:</InputLabel> 
                         <TextField  className={classes.text} type="text" value={title}  onChange={(e) => setTitle(e.target.value)} required/>
-                             <img className={classes.img} src={memes[memeIndex].url} /> 
-                             <Button className={classes.skip} onClick={next}>DALEJ</Button>
-                             <Button className={classes.skip} onClick={back}>WROC</Button>
+                             <img className={classes.img} src={memes[memeIndex].url} alt={memes[title]}/> 
+
+                                <Buttons next={next} back={back} classes={classes} memeIndex={memeIndex} memes={memes}/>
+                
                              <div className="KamilaDialogMap">
                                 { 
-                                    captions.map((c,index) => (
+                                    captions.map((c,index) => {
+                                        return(
                                         <DialogContent className={classes.new} >
                                         <InputLabel>Tekst {index +1}</InputLabel> 
                                         <TextField className={classes.text} key={index} onChange={(e)=> updateCaption(e, index) } />
                                         </DialogContent>
-                                    ))
+                                        )
+                                        })
                                 }
                                 </div>
                         </FormControl>
-                        <Button type="submit" value="add mem" variant="contained" color="primary" size="medium">Dodaj</Button>
+                        <Button onClick={generateMem} type="submit" value="add mem" variant="contained" color="primary" size="medium">Dodaj</Button>
                     </form>
                 </DialogContent>    
                 <DialogActions>      
@@ -193,7 +210,7 @@ const NewmemForm = () => {
         : <>
           <Button onClick= {handleClickOpen} className={classes.root} >DODAJ MEMA</Button>
           <Dialog open={open} className="KamilaDialog">
-            <img src={gif} frameBorder="0" className="KamilaGif" />
+            <img src={gif} frameBorder="0" className="KamilaGif" alt="Gif" />
           </Dialog>
           <DialogActions>      
                 <Button onClick={handleClose} color="primary">CLOSE</Button>

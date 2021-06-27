@@ -7,6 +7,7 @@ export const memReducer = (state,action) => {
                 title: action.mem.title,
                 upvotes: 0, 
                 downvotes: 0, 
+                captions: action.mem.captions,
                 img: action.mem.img,
                 id: v4()
             }]

@@ -8,17 +8,22 @@ static contextType = ThemeContext;
 
 
 render(){
-    console.log(this.context);
+   
     const {isLightTheme,light,dark,toogleTheme} = this.context;
     const theme = isLightTheme ? light: dark;
+    const theme1 = isLightTheme ? dark: light;
+
+
     return(
-        <nav style={{ background: theme.ui, color: theme.sytax }}>
+
+         <nav onClick={toogleTheme} >
             <ul className={`menuNav ${this.props.navbarOpen ? "showMenu" : ""}`}>
-                <li onClick={toogleTheme} style={{backgroundColor: theme.ui, color: theme.sytax}}><Link to="/hot">HOT</Link></li>
-                <li onClick={toogleTheme} style={{backgroundColor: theme.ui, color: theme.sytax}}><Link to="/regular">REGULAR</Link></li>          
+                <li><Link style={{backgroundColor: theme.ui, color: theme1.sytax, padding: theme.padding, borderRadius:theme.borderRadius}} to="/hot">HOT</Link></li>
+                <li><Link style={{backgroundColor: theme1.ui, color: theme.sytax, padding: theme1.padding, borderRadius:theme1.borderRadius}} to="/regular">REGULAR</Link></li>          
             </ul>
         </nav>
-    )
+    ) 
+   
 }}
 
 export default Navbar

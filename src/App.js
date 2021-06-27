@@ -2,15 +2,14 @@
 
 import './App.css';
 import Backg from './Background/backg.jsx';
-import Regular from './components/Mems/Regular.jsx';
-import Hot from './components/Mems/Hot.jsx';
+import Regular from './components/Mems/Regular.js';
+import Hot from './components/Mems/Hot.js';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import ToggleMenu from './components/Menu/ToggleMenu.js';
-// import { useEffect, useState } from 'react';
 import MemContextProvider from './context/MemContextProvider';
 import ThemeContext from './context/ThemeContext';
-// import MemsList from './components/Mems/MemsList';
-// import {v4} from 'uuid';
+import RatingContextProvider from './context/RatingContextProvider';
+
 
 
 function App() {
@@ -19,22 +18,26 @@ function App() {
   return (
     
     <MemContextProvider>
+      <RatingContextProvider>
       <Router>
         <div className="App">
         <ThemeContext>
           <ToggleMenu/>               
           <Backg/>
         </ThemeContext>
-        </div>
+        
         <Switch>
-            <Route path='/regular'>      
-              <Regular/>
-            </Route>
             <Route path='/hot'> 
               <Hot/>
             </Route>
+            <Route path='/regular'>      
+              <Regular/>
+            </Route>
+          
         </Switch>
+        </div>
       </Router>
+      </RatingContextProvider>
       </MemContextProvider>
      
   );
