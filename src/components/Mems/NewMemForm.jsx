@@ -10,11 +10,13 @@ import React, { useContext, useEffect, useState } from 'react';
 import { MemContext } from '../../context/MemContextProvider';
 import gif from '../../images/loga/giphy.gif';
 import Buttons from '../Form/Buttons';
-
+import MemIndexContext from '../../context/MemeIndexProvider';
 
 const NewmemForm = () => {
     const {dispatch} = useContext(MemContext);
-
+    const {upvotes,downvotes} = useContext(MemContext);
+    // const [memeIndex,changeIndex] = useContext(MemIndexContext);
+    const [memeIndex,setMemeIndex] = useState(0);
 
     const useStyles = makeStyles((theme)=>(
         {
@@ -67,7 +69,6 @@ const NewmemForm = () => {
     const [open,setOpen] = useState(false);
     const [img,setImg] = useState('');
     const [memes,setMemes] =useState([]);
-    const [memeIndex,setMemeIndex] = useState(0);
     const [captions,setCaptions] = useState([]);
     // const [boxes, setBoxes] = useState('');
   
@@ -85,11 +86,14 @@ const NewmemForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        
         dispatch({
             type: 'ADD_MEM', 
             mem: {
-                title,img,captions
+                title,
+                img,
+                captions,
+                upvotes : 10,
+                downvotes : 2
             }});
         setTitle('');
         setImg('');
@@ -99,6 +103,7 @@ const NewmemForm = () => {
 
     const generateMem = () => {
         const currentMeme = memes[memeIndex];
+        console.log(currentMeme);
         const formData = new FormData();
 
         formData.append('username', 'KamilB'); 
@@ -136,11 +141,11 @@ const NewmemForm = () => {
             array[j] = temp;
         }
     }
-    const next = () => {
+    const next = (e) => {
+        e.preventDefault();
          setMemeIndex(memeIndex + 1);
     }
-    const back = () => {
-      
+    const back = (e) => {
         setMemeIndex(memeIndex - 1);
     }
    

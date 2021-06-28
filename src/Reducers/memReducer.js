@@ -5,8 +5,8 @@ export const memReducer = (state,action) => {
         case 'ADD_MEM': 
             return [...state, {
                 title: action.mem.title,
-                upvotes: 0, 
-                downvotes: 0, 
+                upvotes: action.mem.upvotes, 
+                downvotes: action.mem.downvotes, 
                 captions: action.mem.captions,
                 img: action.mem.img,
                 id: v4()

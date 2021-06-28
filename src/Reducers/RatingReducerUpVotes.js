@@ -5,6 +5,8 @@ const RatingReducerUpVotes = (state,action) => {
             return state + 1;
         case 'REMOVE_ONE':
             return state - 1;
+        case 'ADD_NUM':
+                return state + action.num;
         default:
             return state
     }

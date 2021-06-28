@@ -9,6 +9,7 @@ import ToggleMenu from './components/Menu/ToggleMenu.js';
 import MemContextProvider from './context/MemContextProvider';
 import ThemeContext from './context/ThemeContext';
 import RatingContextProvider from './context/RatingContextProvider';
+import MemeIndexProvider  from './context/MemeIndexProvider';
 
 
 
@@ -17,10 +18,11 @@ function App() {
 
   return (
     
-    <MemContextProvider>
+    <MemContextProvider>  
       <RatingContextProvider>
       <Router>
         <div className="App">
+        <MemeIndexProvider>
         <ThemeContext>
           <ToggleMenu/>               
           <Backg/>
@@ -35,9 +37,11 @@ function App() {
             </Route>
           
         </Switch>
+        </MemeIndexProvider>
         </div>
       </Router>
       </RatingContextProvider>
+     
       </MemContextProvider>
      
   );

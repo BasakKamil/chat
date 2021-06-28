@@ -11,9 +11,6 @@ const Regular = () => {
     const {mems} = useContext(MemContext);
    
 
-
-
-
     const useStyles = makeStyles((theme)=>({
         root: {
              flexGrow:1,
@@ -38,6 +35,7 @@ const Regular = () => {
                 <Grid item xs={12}>
                     <Grid container justify="center" >
                         {mems.map((mem,index) => {
+                            console.log(mem);
                             const box = mem.captions;
                             return (
                                 <Paper className={classes.paper} key={index}>

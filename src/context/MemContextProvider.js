@@ -2,10 +2,11 @@ import React, {createContext, useReducer, useEffect } from 'react';
 import { memReducer } from '../Reducers/memReducer';
 
 
+
 export const MemContext = createContext();
 
 const MemContextProvider = (props) => {
-  
+   
     const [mems,dispatch] = useReducer(memReducer,[], 
     () => {
         const localData = localStorage.getItem('mems');
@@ -13,16 +14,14 @@ const MemContextProvider = (props) => {
     }
     );
 
-
-
     useEffect(()=> {
-        console.log(mems);
+        // console.log(mems);
         localStorage.setItem('mems', JSON.stringify(mems))
     },[mems]);
   
 
     return (
-        <MemContext.Provider value={{mems,dispatch }}>
+        <MemContext.Provider value={{mems,dispatch}}>
             {props.children}
         </MemContext.Provider>
     )
