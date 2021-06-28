@@ -27,9 +27,10 @@ const Mem = ({mem,box}) => {
              <img alt={mem.title} src={mem.img} className={moje.img}/>
              <div className="KamciaWewnatrz">
              {box.map((Text,index) => {
-                 const nr = index +1 ;
+                 const nr = index * 1 ;
+                 
                  return(
-                     <p className="p" style={{marginTop:`${nr}4%`}} key={index}>{Text}</p>      
+                     <p className="p" style={{marginTop:`${nr}2%`}} key={index}>{Text}</p>      
                  )
              })}
               </div>

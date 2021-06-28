@@ -25,7 +25,8 @@
 .KamciaWewnatrz{
   position: absolute;
   z-index: 100;
-  width: 100%;
+  width: 80%;
+  left: 10%;
   height: 100%;
   font-weight: bold;
   font-size: 35px;
@@ -67,7 +68,7 @@
   
     border-radius: 10px;
     position: absolute;
-    z-index: 9999999999;
+    z-index: 999;
     top: 20%;
     width: 80%;
     padding: 10%;
@@ -81,7 +82,7 @@
 .noMems{
   border-radius: 10px;
   position: absolute;
-  z-index: 9999999999;
+  z-index: 999;
   top: 20%;
   width: 80%;
   padding: 10%;
